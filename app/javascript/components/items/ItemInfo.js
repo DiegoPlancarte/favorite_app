@@ -51,13 +51,21 @@ const ItemInfo = (props) => {
   //   console.log(favorite)
   // },[favorite])
 
+  // Works but is previous version using useState hook
+  // const handleFavorite = () => {
+  //   setFavorite(oldFavorite => {
+  //     const value = { favoritor_id: props.current_user.id, favoritable_id: item.id };
+  //     const newFavorite = {...oldFavorite, ...value};
+  //     createFavorite(newFavorite);
+  //     return newFavorite;
+  //   });
+  // }
+
+  // Newest working version without hook
   const handleFavorite = () => {
-    setFavorite(oldFavorite => {
-      const value = { favoritor_id: props.current_user.id, favoritable_id: item.id };
-      const newFavorite = {...oldFavorite, ...value};
-      createFavorite(newFavorite);
-      return newFavorite;
-    });
+    const favoriteTemplate = {favoritable_type: 'Item', favoritor_type: 'User' }; 
+    const value =  { favoritor_id: props.current_user.id, favoritable_id: item.id }; 
+    createFavorite({...favoriteTemplate, ...value})
   }
 
   if (item === null) {
