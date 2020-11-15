@@ -53,11 +53,34 @@ const ItemInfo = (props) => {
     })
   }
 
-  const favorited = favorites.filter(v => {
-    return(v.favoritable_id === item.id)
-  })
+  const deleteFavorited = ()=> {
+		return fetch(`/favorites/${favorited.id}` ,{
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': props.token
+      },
+			method: 'DELETE'
+		})
+		.then((response)=> {
+			if(response.ok){
+        alert('This items has been removed from your favorites!')
+        window.location.reload(false)
+			}
+		})
+	}
 
-  console.log(favorited)
+  const favorited = favorites.find(v => v.favoritable_id === item.id);
+
+  const favoriteButton = () => {
+    if (favorited) {
+      return (
+        <Button onClick={deleteFavorited}>Unfavorite</Button>
+      )
+    } return (
+      <Button onClick={handleFavorite}>Favorite</Button>
+    )
+  }
+
   // Original, incorrect code
   // const handleFavorite = () => {
   //   const value = { favoritor_id: props.current_user.id, favoritable_id: item.id }
@@ -92,7 +115,7 @@ const ItemInfo = (props) => {
 
   return (
     <React.Fragment>
-    <Button onClick={ handleFavorite } >Favorite</Button>
+    { favoriteButton() }
       <h1>{item.title}</h1>
       <p>{item.body}</p>
       <p>{item.user_id}</p>
