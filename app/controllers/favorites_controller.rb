@@ -1,18 +1,20 @@
 class FavoritesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_favorite, only: [:show, :edit, :update, :destroy]
   
-    def index
-      @user = current_user.id
-      @favorites = Favorite.where(:favoritor_id => @user)
-      render json: @favorites
-    end
+  def index
+    @user = current_user.id
+    @favorites = Favorite.where(:favoritor_id => @user)
+    render json: @favorites
+  end
 
   def show
     render json: @favorite
   end
 
   def create
-    @favorite = Favorite.create!(favorite_params)
+    @newFavorite = Favorite.create!(favorite_params)
+    render json: @newFavorite
   end
 
   def destroy

@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 const ItemInfo = (props) => {
 
   const [item, setItem] = useState([]);
-  const [ favorite, setFavorite ] = useState({favoritable_type: 'Item', favoritor_type: 'User' })
+  const [ favorites, setFavorite ] = useState([])
 
   useEffect(() => {
     fetch(`/items/${props.match.params.id}`)
@@ -15,6 +15,18 @@ const ItemInfo = (props) => {
       })
       .then((item) => {
         setItem(item);
+      })
+  }, []);
+
+  useEffect(() => {
+    fetch('/favorites')
+    .then((response)=>{
+      if(response.status === 200){
+          return(response.json())
+        }
+      })
+      .then((data) => {
+        setFavorite(data);
       })
   }, []);
 
@@ -29,8 +41,9 @@ const ItemInfo = (props) => {
     })
     .then((resp) => {
       if (resp.ok) {
-        setFavorite({})
         alert('This items has been favorited!')
+        window.location.reload(false)
+        // props.history.push(`/iteminfo/${props.match.params.id}`)
       }
     })
     .catch((err) => {
@@ -40,6 +53,11 @@ const ItemInfo = (props) => {
     })
   }
 
+  const favorited = favorites.filter(v => {
+    return(v.favoritable_id === item.id)
+  })
+
+  console.log(favorited)
   // Original, incorrect code
   // const handleFavorite = () => {
   //   const value = { favoritor_id: props.current_user.id, favoritable_id: item.id }
