@@ -47,3 +47,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'react-rails', '~> 2.6', '>= 2.6.1'
 gem 'devise', '~> 4.7', '>= 4.7.3'
 gem 'bootstrap', '~> 4.5', '>= 4.5.3'
+gem 'acts_as_favoritor', '~> 5.0'
