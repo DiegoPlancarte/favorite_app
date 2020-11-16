@@ -4,7 +4,7 @@ import useCreate from '../hooks/useCreate'
 
 const CreateItem = (props) => {
 
-  const [ createItem ] = useCreate('items', props, 'allitems')
+  const [ createItem, itemLoading, itemError ] = useCreate('items', props, 'allitems')
   const [ item, setItem ] = useState({})
 
   const handleSubmit = (event) => {
@@ -19,6 +19,37 @@ const CreateItem = (props) => {
     setItem(item=>({...item, user_id: props.current_user.id }))
     setItem(item => ({...item, [event.target.name]: event.target.value}));
   }
+
+  // const userId = () => {
+  //   if (props.current_user) {
+  //     return props.current_user.id
+  //   } else {
+  //     return null
+  //   }
+  // }
+
+  // const createItem = (data) => {
+  //   fetch(`/items`, {
+  //     body: JSON.stringify(data),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'X-CSRF-TOKEN': props.token
+  //     },
+  //     method: 'POST'
+  //   })
+  //   .then((resp) => {
+  //     if (resp.ok) {
+  //       setItem({})
+  //       alert('Your blog has been created!')
+  //       props.history.push(`/allitems`)
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     if (err) {
+  //       console.log(err)
+  //     }
+  //   })
+  // }
 
   return (
     <React.Fragment>

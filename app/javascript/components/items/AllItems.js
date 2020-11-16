@@ -1,48 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import React from 'react';
+import { Button, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
+import useRead from '../hooks/useRead'
 
-const ShowItems = (props) => {
+const ShowItems = () => {
 
-  const [ items, setItems ] = useState([])
-  const [ favorites, setFavorites ] = useState([])
+  const [ items, setItems, itemsLoading, itemErrors ] = useRead('items')
 
-  useEffect(()=> {
-    fetch('/items')
-      .then((response)=>{
-        if(response.status === 200){
-            return(response.json())
-          }
-      })
-      .then((data) => {
-        setItems(data);
-      })
-      .catch((err) => {
-        if(err) {
-          console.log(err)
-        }
-      })
-  }, []);
-
-  useEffect(()=> {
-    fetch('/favorites')
-      .then((response)=>{
-        if(response.status === 200){
-            return(response.json())
-          }
-      })
-      .then((data) => {
-        setFavorites(data);
-      })
-      .catch((err) => {
-        if(err) {
-          console.log(err)
-        }
-      })
-  }, []);
-
-  if (items === null || favorites === null) {
-    return <div>Loading...</div>
+  if (itemsLoading) {
+    return <div><Spinner animation="border" variant="primary" />Loading...</div>
   }
 
   return (

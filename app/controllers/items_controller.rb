@@ -27,15 +27,16 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    @item = Item.new(item_params)
-
-    respond_to do |format|
-      if @item.save
-        format.json { render :show, status: :created, location: @item }
-      else
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
-    end
+    @item = Item.create!(item_params)
+    render json: Item.all
+    # @item = Item.new(item_params)
+    # respond_to do |format|
+    #   if @item.save
+    #     format.json { render :show, status: :created, location: @item }
+    #   else
+    #     format.json { render json: @item.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /items/1

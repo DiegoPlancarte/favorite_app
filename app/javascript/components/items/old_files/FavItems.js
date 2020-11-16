@@ -1,11 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useRead from '../hooks/useRead'
 
-const FavItems = () => {
+const FavItems = (props) => {
 
   const [ items, setItems, itemsLoading, itemErrors ] = useRead('items')
   const [ favorites, setFavorites, favoritesLoading, favoriteErrors ] = useRead('favorites')
+  // const [items, setItems] = useState([]);
+  // const [ favorites, setFavorites ] = useState([])
+
+  // useEffect(() => {
+  //   fetch('/items')
+  //   .then((response)=>{
+  //     if(response.status === 200){
+  //         return(response.json())
+  //       }
+  //     })
+  //     .then((data) => {
+  //       setItems(data);
+  //     })
+  // }, []);
+
+  // useEffect(() => {
+  //   fetch('/favorites')
+  //   .then((response)=>{
+  //     if(response.status === 200){
+  //         return(response.json())
+  //       }
+  //     })
+  //     .then((data) => {
+  //       setFavorites(data);
+  //     })
+  // }, []);
 
   if (itemsLoading || favoritesLoading) {
     return <div>Loading...</div>
