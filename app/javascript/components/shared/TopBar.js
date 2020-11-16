@@ -20,10 +20,10 @@ const TopBar = (props) => {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="/allitems">All Items</Nav.Link>
-          <Nav.Link href="/">Favorite Items</Nav.Link>
+          <Nav.Link href="/favorite_items">Favorite Items</Nav.Link>
           
           <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-            <NavDropdown.Item href="/">Something</NavDropdown.Item>
+            <NavDropdown.Item href="/favorite_items">Favorite Items</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="/">Separated link</NavDropdown.Item>
           </NavDropdown>

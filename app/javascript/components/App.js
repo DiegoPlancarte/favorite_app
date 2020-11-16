@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import TopBar from "./shared/TopBar"
 import AllItems from "./items/AllItems"
+import FavItems from "./items/FavItems"
 import CreateItem from "./items/CreateItem"
 import ItemInfo from "./items/ItemInfo"
 import ItemInfo2 from "./items/ItemInfo2"
@@ -47,6 +48,7 @@ class App extends React.Component {
           
           <Switch>
             <Route path="/allitems" render={(props) => <AllItems {...props} token={ token } /> }/>
+            <Route path="/favorite_items" render={(props) => <FavItems {...props} token={ token } /> }/>
             <Route path="/createitem" render={(props) => <CreateItem {...props} current_user= { current_user } token={ token } /> }/>
             <Route path ='/iteminfo/:id' render={(props) => <ItemInfo {...props} current_user= { current_user } token={ token } /> }/>
             <Route path ='/iteminfo2/:id' render={(props) => <ItemInfo2 {...props} items={ this.state.items } current_user= { current_user } token={ token } /> }/>
