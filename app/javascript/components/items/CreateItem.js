@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import useCreate from '../hooks/useCreate'
+import useForm from '../hooks/useForm'
 
 const CreateItem = (props) => {
 
   const [ createItem ] = useCreate('items', props, 'allitems')
-  const [ item, setItem ] = useState({})
+  // const [ item, setItem ] = useState({})
+  const [ item, handleInputChange, handleSubmit ] = useForm()
 
-  const handleSubmit = (event) => {
-    if(event) {
-      event.preventDefault();
-    }
-    createItem(item)
-  }
+  // const handleSubmit = (event) => {
+  //   if(event) {
+  //     event.preventDefault();
+  //   }
+  //   createItem(item)
+  // }
   
-  const handleInputChange = (event) => {
-    event.persist();
-    setItem(item=>({...item, user_id: props.current_user.id }))
-    setItem(item => ({...item, [event.target.name]: event.target.value}));
-  }
+  // const handleInputChange = (event) => {
+  //   event.persist();
+  //   setItem(item=>({...item, user_id: props.current_user.id }))
+  //   setItem(item => ({...item, [event.target.name]: event.target.value}));
+  // }
 
   return (
     <React.Fragment>

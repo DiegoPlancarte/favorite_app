@@ -4,6 +4,8 @@ import { Button } from 'react-bootstrap';
 import useRead from '../hooks/useRead'
 import useCreate from '../hooks/useCreate'
 import useDelete from '../hooks/useDelete'
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
+import { IconContext } from "react-icons";
 
 const ItemInfo = (props) => {
 
@@ -37,10 +39,14 @@ const ItemInfo = (props) => {
   const favoriteButton = () => {
     if (favorited) {
       return (
-        <Button onClick={deleteFavorite}>Unfavorite</Button>
+        <IconContext.Provider value={{ size: "2.5em", color: 'pink' }} >
+          <a onClick={deleteFavorite}>< MdFavorite /></a>
+        </IconContext.Provider>
       )
     } return (
-      <Button onClick={handleFavorite}>Favorite</Button>
+      <IconContext.Provider value={{ size: "2.5em", color: 'grey' }} >
+        <a onClick={handleFavorite}>< MdFavoriteBorder/></a>
+      </IconContext.Provider>
     )
   }
 

@@ -1,12 +1,11 @@
 import { useState } from 'react';
 
-const useForm = ( props ) => {
+const useForm = ( submitFunc, data ) => {
   
   const [ state, setState ] = useState({});
 
   const handleInputChange = (event) => {
     event.persist();
-    setState(state=>({...state, user_id: props.current_user.id }))
     setState(state => ({...state, [event.target.name]: event.target.value}));
   }
   
@@ -14,12 +13,13 @@ const useForm = ( props ) => {
     if(event) {
       event.preventDefault();
     }
-    postData(projects)
+    `${submitFunc}`
   }
 
   return [
     state,
-    handleInputChange
+    handleInputChange,
+    handleSubmit
   ]
 }
 
